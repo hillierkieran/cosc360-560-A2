@@ -1,0 +1,176 @@
+<p><em>@<a href="https://mylearn.une.edu.au/user/view.php?id=258139&amp;course=28581">Muhammad Ibrahim</a> please feel free to take this down if I'm not supposed to share this kind of thing.</em></p>
+
+<p>Hi guys! Those on the Discord server will have already seen this but I'll share to help those here too.</p>
+
+<p>After being confused with the Assignment 2 instructions, I used my notes from all the information our teacher has shared about assessment 2 so far to make an updated set of instructions. Feel free to use it if you find it useful. ❤</p>
+
+<p><strong>⚠️ THIS IS UNOFFICIAL AND WAS MADE BY A STUDENT&nbsp;⚠️</strong>&nbsp;Use at your own risk.</p>
+
+<hr>
+
+<h2>Assignment 2: Enhanced Blog Application</h2>
+
+<h3>Objective</h3>
+<p>Enhance the basic blog application by adding user authentication using Laravel UI with Bootstrap. Create an admin panel for managing blog posts and users with distinct roles for admin and author.</p>
+
+<h3>Guidelines</h3>
+
+<h3>1. Setup and Initialise Project (1 point)</h3>
+<ul>
+    <li>Ensure your development environment is set up with the basic blog application from Assessment 1.</li>
+    <li>Create a new branch in your GitHub repository for this feature: <code>git checkout -b feature/auth-admin-panel</code>.</li>
+</ul>
+
+<h3>2. Setup MongoDB (2 points)</h3>
+
+<h3>3. Install Laravel UI and Set Up Authentication (2 points)</h3>
+<ul>
+    <li>Install Laravel UI package: <code>composer require laravel/ui</code>.</li>
+    <li>Generate the authentication scaffolding: <code>php artisan ui bootstrap --auth</code>.</li>
+    <li>Run the required commands to set up Bootstrap: <code>npm install &amp;&amp; npm run dev</code>.</li>
+    <li>Update the master layout to include Bootstrap styling.</li>
+</ul>
+<p>Middleware (bonus) <a href="#middleware">moved to step 8</a>.</p>
+
+<h3>4. Define Admin and Author Routes (1 point)</h3>
+<ul>
+    <li>Define routes in <code>routes/web.php</code> for the admin panel with Admin prefix.</li>
+    <li>Create routes for managing users and blog posts within the admin panel.</li>
+    <li><em>(Optionally)</em> Use separate prefixes for admin and author routes:
+        <ul>
+            <li>Admin Routes: <code>/admin/*</code> (e.g., <code>/admin/register</code>, <code>/admin/login</code>, <code>/admin/dashboard</code>)</li>
+            <li>Author Routes: <code>/author/*</code> (e.g., <code>/author/register</code>, <code>/author/login</code>, <code>/author/dashboard</code>)</li>
+        </ul>
+    </li>
+    <li><strong>OR</strong> Combine Admin <em>and</em> Author routes under the same admin prefix.</li>
+    <li><em>(Bonus)</em> Protect routes using middleware to restrict access based on roles.</li>
+</ul>
+
+<h3>5. Create Admin Controllers (2 points)</h3>
+<ul>
+    <li>Generate controllers for managing users and blog posts:
+        <ul>
+            <li><code>php artisan make:controller Admin/UserController</code></li>
+            <li><code>php artisan make:controller Admin/PostController</code></li>
+            <li><code>php artisan make:controller Author/PostController</code>
+                <ul>
+                    <li><em>(Optional</em>, or add the author logic in the admin controllers)</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Implement CRUD operations with appropriate validation.</li>
+</ul>
+
+<h3>6. Create Blade Views for Admin Panel (4 points)</h3>
+<ul>
+    <li>Download bootstrap examples from <a href="https://getbootstrap.com/docs/5.3/examples/">Bootstrap Examples</a>
+        <ul>
+            <li>Use the <strong>dashboard template</strong> for the admin panel layout.</li>
+            <li>Use the <strong>form template</strong> to create your forms.</li>
+            <li>OR use your own</li>
+        </ul>
+    </li>
+    <li>Create new master layout(s):
+        <ul>
+            <li>Admin views (<code>admin.blade.php</code>): for user and post management.</li>
+            <li>Author views (<code>author.blade.php</code>): for managing their own posts.
+                <ul>
+                    <li><em>(Optional</em>, or just use the admin layout)</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Create new management views for listing, creating, editing, and deleting users and posts.</li>
+    <li>Ensure the views use Bootstrap components for styling and are consistent with the overall application design.</li>
+</ul>
+
+<h3>7. Enhance User Management (2 points)</h3>
+<ul>
+    <li>Add roles to users and implement role-based access control:
+        <ul>
+            <li><code>admin</code>, <code>author</code>, and <code>user</code> roles.</li>
+            <li>Update the registration process to allow assigning roles.</li>
+            <li>create a new migration to add roles in the database.</li>
+        </ul>
+    </li>
+    <li>Ensure only admins can access user management functionalities.</li>
+    <li><em>More detailed information on role privileges in</em> <a href="#roles">next section</a>.</li>
+</ul>
+
+<h3 id="middleware">8. <em>(Bonus)</em> Create Middleware for Admin (&amp; <em>Optionally</em> Author) Access and Apply to Relevant Routes (2 points)</h3>
+<ul>
+    <li>Generate middleware to restrict access to the admin panel:
+        <ul>
+            <li><code>php artisan make:middleware AdminMiddleware</code></li>
+        </ul>
+    </li>
+    <li>Implement the middleware to check if the authenticated user is an admin.</li>
+    <li>Apply middleware to the admin routes.</li>
+</ul>
+
+<h3>9. Testing (2 points)</h3>
+<ul>
+    <li>Manually test the authentication system.</li>
+    <li>Test each admin functionality by creating, reading, updating, and deleting users and blog posts.</li>
+    <li>Ensure that non-admin users cannot access the admin panel.</li>
+</ul>
+
+<h3>10. GitHub (2 points)</h3>
+<ul>
+    <li>Regularly commit your changes and push them to a GitHub repository.</li>
+</ul>
+
+<h3>11. Report (2 points)</h3>
+<ul>
+    <li>Write a brief report in the <code>README.md</code> file describing your approach, any challenges faced, and the GitHub repository URL.</li>
+</ul>
+
+<hr>
+
+<h2 id="roles">Detailed Role Requirements:</h2>
+<ol>
+    <li><strong>Admin Role:</strong>
+        <ul>
+            <li>Full access to post management and user management.</li>
+            <li>Can create, update, delete, and view <em>all</em> posts.</li>
+            <li>Can create, update, delete, and manage all users (authors and users).</li>
+        </ul>
+    </li>
+    <li><strong>Author Role:</strong>
+        <ul>
+            <li>Can register via <code>/author/register</code>.</li>
+            <li>Limited access post management (posts they own).</li>
+            <li>Can create, update, delete, and view <strong>only their own posts</strong>.</li>
+            <li>Cannot access user management or other authors' posts.</li>
+        </ul>
+    </li>
+    <li><strong>User Role:</strong>
+        <ul>
+            <li>Users are <strong>not</strong> part of this assignment but will be handled in Assignment 3.</li>
+        </ul>
+    </li>
+</ol>
+
+<h3>Registration and Login:</h3>
+<ul>
+    <li><strong>Admin Registration:</strong>
+        <ul>
+            <li>Only one admin should be created through a seeder.</li>
+            <li>Admin cannot be registered via the public registration form.</li>
+            <li>Authors can log in via <code>/admin/login</code> and be redirected to <code>/admin/dashboard</code>.</li>
+        </ul>
+    </li>
+    <li><strong>Author Registration</strong> <em>(Optional, or add author functionality in the admin stuff):</em>
+        <ul>
+            <li>Authors can register via <code>/author/register</code>.</li>
+            <li>Authors can log in via <code>/author/login</code> and be redirected to <code>/author/dashboard</code>.</li>
+        </ul>
+    </li>
+    <li><strong>Middleware</strong> <em>(Bonus):</em>
+        <ul>
+            <li>Ensure that only accounts with the <code>admin</code> role can access routes prefixed with <code>/admin</code>.</li>
+            <li>Ensure that only accounts with the <code>author</code> role can access routes prefixed with <code>/author</code>.</li>
+        </ul>
+    </li>
+</ul>
