@@ -52,7 +52,7 @@ _Admin Access Middleware (bonus) moved to step 8._
 - Ensure only admins can access user management functionalities.
 - _More detailed information on role privileges in [next section](#detailed-role-requirements)._
 
-#### 8. (_Bonus_) Create Middleware for Admin Access and Apply to Admin Routes (2 points)
+#### 8. (_Bonus_) Create Middleware for Admin (& _Optionally_ Author) Access and Apply to Relevant Routes (2 points)
 - Generate middleware to restrict access to the admin panel:
     - `php artisan make:middleware AdminMiddleware`
 - Implement the middleware to check if the authenticated user is an admin.
@@ -79,7 +79,7 @@ _Admin Access Middleware (bonus) moved to step 8._
 2. **Author Role:**
     - Can register via `/author/register`.
     - Limited access post management (posts they own).
-    - Can create, update, delete, and view only their own posts.
+    - Can create, update, delete, and view **only their own posts**.
     - Cannot access user management or other authors' posts.
 
 3. **User Role:**
@@ -91,10 +91,10 @@ _Admin Access Middleware (bonus) moved to step 8._
     - Only one admin should be created through a seeder.
     - Admin cannot be registered via the public registration form.
 
-- **Author Registration:**
+- **Author Registration (_Optional_):**
     - Authors can register via `/author/register`.
     - Authors can log in via `/author/login` and be redirected to `/author/dashboard`.
 
-- **Middleware:**
+- **Middleware (_Bonus_):**
     - Ensure that only users with the 'admin' role can access routes prefixed with `/admin`.
     - Ensure that authors can only access routes prefixed with `/author` and manage their posts.
