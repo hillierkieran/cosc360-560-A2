@@ -17,30 +17,34 @@ Enhance the basic blog application by adding user authentication using Laravel U
 - Run the required commands to set up Bootstrap: `npm install && npm run dev`.
 - Update the master layout to include Bootstrap styling.
 
-_Admin Access Middleware (bonus) moved to step 8._
+_Middleware (bonus) [moved to step 8](#8-bonus-create-middleware-for-admin--optionally-author-access-and-apply-to-relevant-routes-2-points)._
 
 #### 4. Define Admin and Author Routes (1 point)
-- Define routes in `web.php` for the admin panel with Admin prefix.
+- Define routes in `routes/web.php` for the admin panel with Admin prefix.
 - Create routes for managing users and blog posts within the admin panel.
-- (_Optional_) Use separate prefixes for admin and author routes [[source](https://mylearn.une.edu.au/mod/forum/discuss.php?d=2344727#p6713365)]:
+- (_Optionally_) Use separate prefixes for admin and author routes [[as suggested in the forum](https://mylearn.une.edu.au/mod/forum/discuss.php?d=2344727#p6713365)]:
     - Admin Routes: `/admin/*` (e.g., `/admin/register`, `/admin/login`, `/admin/dashboard`)
     - Author Routes: `/author/*` (e.g., `/author/register`, `/author/login`, `/author/dashboard`)
+- **OR** Combine Admin _and_ Author routes under the same admin prefix.
 - (_Bonus_) Protect routes using middleware to restrict access based on roles.
 
 #### 5. Create Admin Controllers (2 points)
 - Generate controllers for managing users and blog posts:
     - `php artisan make:controller Admin/UserController`
     - `php artisan make:controller Admin/PostController`
-    - `php artisan make:controller Author/PostController` (optional)
+    - `php artisan make:controller Author/PostController`
+        - (_Optional_, or add the author logic in the admin controllers)
 - Implement CRUD operations with appropriate validation.
 
 #### 6. Create Blade Views for Admin Panel (4 points)
 - Download bootstrap examples from [Bootstrap Examples](https://getbootstrap.com/docs/5.3/examples/)
-- Use the **dashboard template** for the admin panel layout.
-- Use the **form template** to create your forms.
+    - Use the **dashboard template** for the admin panel layout.
+    - Use the **form template** to create your forms.
+    - OR use your own
 - Create new master layout(s):
     - Admin views (`admin.blade.php`): for user and post management.
-    - Author views (`author.blade.php`): for managing their own posts. (_Optional_)
+    - Author views (`author.blade.php`): for managing their own posts.
+        - (_Optional_, or just use the admin layout)
 - Create new management views for listing, creating, editing, and deleting users and posts.
 - Ensure the views use Bootstrap components for styling and are consistent with the overall application design.
 
@@ -90,11 +94,12 @@ _Admin Access Middleware (bonus) moved to step 8._
 - **Admin Registration:**
     - Only one admin should be created through a seeder.
     - Admin cannot be registered via the public registration form.
+    - Authors can log in via `/admin/login` and be redirected to `/admin/dashboard`.
 
-- **Author Registration (_Optional_):**
+- **Author Registration** (_Optional_, or add author functionality in the admin stuff):
     - Authors can register via `/author/register`.
     - Authors can log in via `/author/login` and be redirected to `/author/dashboard`.
 
 - **Middleware (_Bonus_):**
-    - Ensure that only users with the 'admin' role can access routes prefixed with `/admin`.
-    - Ensure that authors can only access routes prefixed with `/author` and manage their posts.
+    - Ensure that only accounts with the `admin` role can access routes prefixed with `/admin`.
+    - Ensure that only accounts with the `author` role can access routes prefixed with `/author`.
